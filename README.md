@@ -1,6 +1,8 @@
-# Clean Architecture Template
+# Muddaker .NET Application
 
-What's included in the template?
+Muddaker is an advanced digital platform specifically designed for managing and tracking Quran memorization (Hifdh), connecting students with specialized teachers (Sheikhs) in Quran teaching and memorization. The platform aims to facilitate the memorization and follow-up process through modern and innovative technological tools.
+
+What's included ?
 
 - SharedKernel project with common Domain-Driven Design abstractions.
 - Domain layer with sample entities.
@@ -18,9 +20,8 @@ What's included in the template?
 - Testing projects
   - Architecture testing
 
-I'm open to hearing your feedback about the template and what you'd like to see in future iterations.
 
-If you're ready to learn more, check out [**Pragmatic Clean Architecture**](https://www.milanjovanovic.tech/pragmatic-clean-architecture?utm_source=ca-template):
+
 
 - Domain-Driven Design
 - Role-based authorization
