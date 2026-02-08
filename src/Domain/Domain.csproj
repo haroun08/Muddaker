@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <RootNamespace>Muddaker.Domain</RootNamespace>
+    <AssemblyName>Muddaker.Domain</AssemblyName>
+  </PropertyGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
+    <PackageReference Include="MediatR.Contracts" />
   </ItemGroup>
 
 </Project>

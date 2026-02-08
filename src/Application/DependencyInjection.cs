@@ -1,23 +1,26 @@
-﻿using Application.Abstractions.Behaviors;
-using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+using Microsoft.Extensions.Hosting;
+using Muddaker.Application.Common.Behaviours;
 
-namespace Application;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static void AddApplicationServices(this IHostApplicationBuilder builder)
     {
-        services.AddMediatR(config =>
+        builder.Services.AddAutoMapper(cfg =>
+            cfg.AddMaps(Assembly.GetExecutingAssembly()));
+
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        builder.Services.AddMediatR(cfg =>
         {
-            config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
-
-            config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
-            config.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
+            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            cfg.AddOpenRequestPreProcessor(typeof(LoggingBehaviour<>));
+            cfg.AddOpenBehavior(typeof(UnhandledExceptionBehaviour<,>));
+            cfg.AddOpenBehavior(typeof(AuthorizationBehaviour<,>));
+            cfg.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+            cfg.AddOpenBehavior(typeof(PerformanceBehaviour<,>));
         });
-
-        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly, includeInternalTypes: true);
-
-        return services;
     }
 }
